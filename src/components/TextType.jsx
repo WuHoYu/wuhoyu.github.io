@@ -6,6 +6,7 @@ import './TextType.css';
 
 const TextType = ({
   text,
+  prefix = '',
   as: Component = 'div',
   typingSpeed = 50,
   initialDelay = 0,
@@ -42,9 +43,9 @@ const TextType = ({
   }, [variableSpeed, typingSpeed]);
 
   const getCurrentTextColor = () => {
-   if (textColors.length === 0) return 'inherit'; // ✅ 继承父层颜色
-  return textColors[currentTextIndex % textColors.length];
-};
+    if (textColors.length === 0) return '#ffffff';
+    return textColors[currentTextIndex % textColors.length];
+  };
 
   useEffect(() => {
     if (!startOnVisible || !containerRef.current) return;
@@ -156,6 +157,11 @@ const TextType = ({
       className: `text-type ${className}`,
       ...props
     },
+    prefix && (
+      <span className="text-type__prefix" style={{ color: getCurrentTextColor() }}>
+        {prefix}
+      </span>
+    ),
     <span className="text-type__content" style={{ color: getCurrentTextColor() }}>
       {displayedText}
     </span>,
@@ -163,6 +169,7 @@ const TextType = ({
       <span
         ref={cursorRef}
         className={`text-type__cursor ${cursorClassName} ${shouldHideCursor ? 'text-type__cursor--hidden' : ''}`}
+        style={{ color: getCurrentTextColor() }}
       >
         {cursorCharacter}
       </span>

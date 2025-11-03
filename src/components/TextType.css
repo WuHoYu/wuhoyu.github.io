@@ -1,7 +1,7 @@
 .text-type {
   display: inline-block;
   white-space: pre-wrap;
-  color: inherit;
+  font-weight: 600; /* bold 字重 */
 }
 
 .text-type__cursor {
@@ -13,4 +13,3 @@
 .text-type__cursor--hidden {
   display: none;
 }
-

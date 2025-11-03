@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_圖層_2" data-name="圖層 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 137.8 137.8">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231815;
+      }
+    </style>
+  </defs>
+  <g id="_圖層_1-2" data-name="圖層 1">
+    <g>
+      <path class="cls-1" d="M98.75,68.9c0,8.17-3.28,15.58-8.6,20.97-1.67,1.69-3.54,3.18-5.57,4.44-4.56,2.82-9.93,4.44-15.68,4.44s-11.12-1.62-15.67-4.44c-2.03-1.26-3.9-2.75-5.57-4.44-5.32-5.39-8.6-12.79-8.6-20.97,0-16.49,13.37-29.85,29.85-29.85s29.85,13.36,29.85,29.85Z"/>
+      <g>
+        <rect class="cls-1" x="61.11" y="0" width="15.58" height="29.31" rx="7.79" ry="7.79"/>
+        <rect class="cls-1" x="61.11" y="108.49" width="15.58" height="29.31" rx="7.79" ry="7.79"/>
+      </g>
+      <g>
+        <rect class="cls-1" x="115.36" y="54.25" width="15.58" height="29.31" rx="7.79" ry="7.79" transform="translate(192.04 -54.25) rotate(90)"/>
+        <rect class="cls-1" x="6.86" y="54.25" width="15.58" height="29.31" rx="7.79" ry="7.79" transform="translate(83.55 54.25) rotate(90)"/>
+      </g>
+      <g>
+        <rect class="cls-1" x="99.47" y="15.89" width="15.58" height="29.31" rx="7.79" ry="7.79" transform="translate(53.01 -66.9) rotate(45)"/>
+        <rect class="cls-1" x="22.75" y="92.6" width="15.58" height="29.31" rx="7.79" ry="7.79" transform="translate(84.79 9.82) rotate(45)"/>
+      </g>
+      <g>
+        <rect class="cls-1" x="99.47" y="92.6" width="15.58" height="29.31" rx="7.79" ry="7.79" transform="translate(258.94 107.26) rotate(135)"/>
+        <rect class="cls-1" x="22.75" y="15.89" width="15.58" height="29.31" rx="7.79" ry="7.79" transform="translate(73.74 30.54) rotate(135)"/>
+      </g>
+    </g>
+  </g>
+</svg>

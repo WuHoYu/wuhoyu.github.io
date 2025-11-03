@@ -1,0 +1,26 @@
+/* Masonry layout styles */
+.list {
+  position: relative;
+  width: 100%;
+  min-height: 200px; /* will be resized by script to fit tallest column */
+}
+
+.item-wrapper {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200px; /* will be overridden by GSAP */
+  height: 200px; /* will be overridden by GSAP */
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+  will-change: transform, width, height, filter, opacity;
+}
+
+.item-img {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

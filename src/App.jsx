@@ -1,27 +1,38 @@
-import './App.css'
-import TextType from './components/TextType'
 
-function App() {
-  return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-      backgroundColor: 'transparent',  // 透明背景
-      color: 'black',
-      fontSize: '2rem',
-      fontFamily: 'Montserrat-VariableFont_wght, sans-serif'
-    }}>
-      <TextType
-        text={["Wu Ho Yu", "for the website", "designer portfolio"]}
-        typingSpeed={75}
-        pauseDuration={1500}
-        showCursor={true}
-        cursorCharacter="|"
-      />
-    </div>
-  )
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Layout from './Layout';
+import Home from './pages/Home';
+import Projects from './pages/Projects';
+import VisualLab from './pages/VisualLab';
+import Cotton from './pages/Cotton';
+import Stepstotheway from './pages/Stepstotheway';
+import Hikvision from './pages/Hikvision';
+import Laihua from './pages/Laihua';
+import Lantern from './pages/lantern.jsx';
+import EvolvingScripts from './pages/evolvingscripts.jsx';
+import Hantype from './pages/hantype.jsx';
+
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: 'projects', element: <Projects /> },
+      { path: 'visual-lab', element: <VisualLab /> },
+      { path: 'cotton', element: <Cotton /> },
+      { path: 'stepstotheway', element: <Stepstotheway /> },
+      { path: 'hikvision', element: <Hikvision /> },
+      { path: 'laihua', element: <Laihua /> },
+      { path: 'lantern', element: <Lantern /> },
+      { path: 'evolvingscripts', element: <EvolvingScripts /> },
+      { path: 'hantype', element: <Hantype /> },
+      
+    ],
+  },
+]);
+
+export default function App() {
+  return <RouterProvider router={router} />;
 }
-
-export default App

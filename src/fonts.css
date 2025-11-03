@@ -1,0 +1,63 @@
+/* Montserrat font-face for all weights */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Alias family to explicitly use local variable Montserrat where desired */
+@font-face {
+  font-family: 'Montserrat Local';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Montserrat Local';
+  src: url('/fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+:root {
+  font-family: 'Montserrat', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body, html {
+  font-family: 'Montserrat', system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+/* Source Han Sans CN Normal */
+@font-face {
+  font-family: 'Source Han Sans CN Normal';
+  src: url('/fonts/SourceHanSansCN-Normal.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Utility class for bold font */
+.font-bold {
+  font-weight: 700;
+}
+
+/* Utility class for extra-light font */
+.font-extralight {
+  font-weight: 200;
+}
+
+/* Utility class for italic font */
+.font-italic {
+  font-style: italic;
+}
