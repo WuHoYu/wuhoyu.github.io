@@ -113,27 +113,36 @@ export default function EvolvingScripts() {
 		>
 			<div className="flex flex-col gap-[10px]" style={{ width: '100%' }}>
 				{/* Sequence: es1, (es2-a/es2-b), es3, es4, es5, es6.mp4, es7, es8.mp4, es9, es10.mp4, es11-a, es11-b, es12.mp4 */}
-						<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-							<Media src={'/photos/evolvingscript/es1.jpg'} alt="Evolving Scripts es1" ratio={'16 / 9'} />
-						</div>
+									<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
+										<ProgressiveImage
+											src={'/photos/evolvingscript/es1.jpg'}
+											placeholderSrc={'/photos/evolvingscript/tiny/es1-tiny.jpg'}
+											alt="Evolving Scripts es1"
+											aspectRatio={'16 / 9'}
+										/>
+									</div>
 				<TwoImagesEqualHeightRow
 										leftSrc={'/photos/evolvingscript/es2-a.png'}
 										rightSrc={'/photos/evolvingscript/es2-b.jpg'}
 					leftAlt="Evolving Scripts es2-a"
 					rightAlt="Evolving Scripts es2-b"
 				/>
-				{[
-					{ src: '/photos/evolvingscript/es3.jpg', alt: 'Evolving Scripts es3' },
-					{ src: '/photos/evolvingscript/es4.jpg', alt: 'Evolving Scripts es4' },
-					{ src: '/photos/evolvingscript/es5.jpg', alt: 'Evolving Scripts es5' },
+								{[ 
+										{ src: '/photos/evolvingscript/es3.jpg', alt: 'Evolving Scripts es3', ph: '/photos/evolvingscript/tiny/es3-tiny.jpg' },
+										{ src: '/photos/evolvingscript/es4.jpg', alt: 'Evolving Scripts es4', ph: '/photos/evolvingscript/tiny/es4-tiny.jpg' },
+										{ src: '/photos/evolvingscript/es5.jpg', alt: 'Evolving Scripts es5', ph: '/photos/evolvingscript/tiny/es5-tiny.jpg' },
 							{ src: '/photos/evolvingscript/es6.mp4', alt: 'Evolving Scripts es6', loopOverride: true },
-					{ src: '/photos/evolvingscript/es7.jpg', alt: 'Evolving Scripts es7' },
+										{ src: '/photos/evolvingscript/es7.jpg', alt: 'Evolving Scripts es7', ph: '/photos/evolvingscript/tiny/es7-tiny.jpg' },
 					{ src: '/photos/evolvingscript/es8.mp4', alt: 'Evolving Scripts es8' },
-					{ src: '/photos/evolvingscript/es9.jpg', alt: 'Evolving Scripts es9' },
+										{ src: '/photos/evolvingscript/es9.jpg', alt: 'Evolving Scripts es9', ph: '/photos/evolvingscript/tiny/es9-tiny.jpg' },
 					{ src: '/photos/evolvingscript/es10.mp4', alt: 'Evolving Scripts es10' }
 				].map((item, i) => (
 					<div className="rounded-[9px]" key={`es-item-${i}`} style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-						<Media src={item.src} alt={item.alt} loopOverride={item.loopOverride} ratio={'16 / 9'} />
+												{/\.(mp4|mov)$/i.test(item.src) ? (
+													<Media src={item.src} alt={item.alt} loopOverride={item.loopOverride} ratio={'16 / 9'} />
+												) : (
+													<ProgressiveImage src={item.src} placeholderSrc={item.ph} alt={item.alt} aspectRatio={'16 / 9'} />
+												)}
 					</div>
 				))}
 				<TwoImagesEqualHeightRow
@@ -142,9 +151,9 @@ export default function EvolvingScripts() {
 					leftAlt="Evolving Scripts es11-a"
 					rightAlt="Evolving Scripts es11-b"
 				/>
-				<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-							<Media src={'/photos/evolvingscript/es12.mp4'} alt="Evolving Scripts es12" ratio={'16 / 9'} />
-				</div>
+								<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
+									<Media src={'/photos/evolvingscript/es12.mp4'} alt="Evolving Scripts es12" ratio={'16 / 9'} />
+								</div>
 			</div>
             
 		</ProjectTemplate>
