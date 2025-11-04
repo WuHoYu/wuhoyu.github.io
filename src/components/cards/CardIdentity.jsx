@@ -1,23 +1,23 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { asset } from '../../utils/assets';
 
 function CardIdentity({ textColor, arrowColor, glassTheme, sliderValue }) {
-  // Smooth crossfade between videos
-  const [currentSrc, setCurrentSrc] = useState(asset('/videos/sign1.webm'));
-  const [fade, setFade] = useState(true);
-  // Detect iOS/iPadOS Safari to apply a blend-mode fallback for WebM alpha
-  const isIOSSafari = useMemo(() => {
+  // Detect iOS/iPadOS Safari and pick the proper format (HEVC alpha MOV for iOS Safari, WEBM alpha otherwise)
+  const isIOSSafari = (() => {
     if (typeof navigator === 'undefined') return false;
     const ua = navigator.userAgent || '';
     const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     const isSafari = /Safari\//.test(ua) && !/Chrome\//.test(ua) && !/CriOS\//.test(ua);
     return isIOS && isSafari;
-  }, []);
+  })();
+
+  // Smooth crossfade between videos
+  const [currentSrc, setCurrentSrc] = useState(asset(isIOSSafari ? '/videos/sign1.mov' : '/videos/sign1.webm'));
+  const [fade, setFade] = useState(true);
   useEffect(() => {
-    let nextSrc = asset('/videos/sign1.webm');
-    if (sliderValue > 40 && sliderValue < 80) {
-      nextSrc = asset('/videos/sign2.webm');
-    }
+    const base = sliderValue > 40 && sliderValue < 80 ? 'sign2' : 'sign1';
+    const chosen = isIOSSafari ? `${base}.mov` : `${base}.webm`;
+    const nextSrc = asset(`/videos/${chosen}`);
     if (nextSrc !== currentSrc) {
       setFade(false);
       setTimeout(() => {
@@ -25,7 +25,7 @@ function CardIdentity({ textColor, arrowColor, glassTheme, sliderValue }) {
         setFade(true);
       }, 400); // fade duration
     }
-  }, [sliderValue, currentSrc]);
+  }, [sliderValue, currentSrc, isIOSSafari]);
   return (
     <div className={`absolute box-border glass-card ${glassTheme}`}
       data-name="card-identity"
@@ -68,72 +68,30 @@ function CardIdentity({ textColor, arrowColor, glassTheme, sliderValue }) {
               >→</span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', height: '100%' }}>
-            {/* iOS/iPadOS Safari fallback: show a simple visible placeholder instead of the flattened WebM */}
-            {isIOSSafari ? (
-              <div
-                aria-label="Identity animation placeholder"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  height: '70%',
-                  width: '70%',
-                  maxHeight: '100%',
-                  maxWidth: '100%',
-                  borderRadius: '12px',
-                  // Subtle frosted tile so there’s no harsh rectangle from the source file
-                  background: glassTheme === 'dark' ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)',
-                  backdropFilter: 'blur(2px)',
-                }}
-              >
-                <span
+                {/* Crossfade: old video fades out, new video fades in */}
+                <video
+                  src={currentSrc}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
                   style={{
-                    fontFamily: 'Montserrat, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif',
-                    fontWeight: 600,
-                    letterSpacing: '0.08em',
-                    fontSize: 'clamp(14px, 3.8vw, 22px)',
-                    color: textColor,
-                    opacity: fade ? 1 : 0.6,
-                    transition: 'opacity 0.4s',
-                    animation: 'idPulse 1.6s ease-in-out infinite',
+                    height: '70%',
+                    width: 'auto',
+                    maxHeight: '100%',
+                    maxWidth: '100%',
+                    objectFit: 'contain', /* centers sign1 and sign2 equally */
+                    display: 'block',
+                    mixBlendMode: 'normal',
+                    WebkitBackfaceVisibility: 'hidden',
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)',
+                    pointerEvents: 'none',
+                    userSelect: 'none',
+                    opacity: fade ? 1 : 0,
+                    transition: 'opacity 0.4s'
                   }}
-                >
-                  SIGN
-                </span>
-                {/* inline keyframes */}
-                <style>{`
-                  @keyframes idPulse {
-                    0% { opacity: 0.7; }
-                    50% { opacity: 1; }
-                    100% { opacity: 0.7; }
-                  }
-                `}</style>
-              </div>
-            ) : (
-              // Crossfade: old video fades out, new video fades in
-              <video
-                src={currentSrc}
-                autoPlay
-                loop
-                muted
-                playsInline
-                style={{
-                  height: '70%',
-                  width: 'auto',
-                  maxHeight: '100%',
-                  maxWidth: '100%',
-                  objectFit: 'contain', /* centers sign1 and sign2 equally */
-                  display: 'block',
-                  WebkitBackfaceVisibility: 'hidden',
-                  backfaceVisibility: 'hidden',
-                  transform: 'translateZ(0)',
-                  pointerEvents: 'none',
-                  userSelect: 'none',
-                  opacity: fade ? 1 : 0,
-                  transition: 'opacity 0.4s'
-                }}
-              />
-            )}
+                />
           </div>
       </div>
     </div>
