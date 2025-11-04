@@ -145,12 +145,12 @@ export default function EvolvingScripts() {
 												)}
 					</div>
 				))}
-				<TwoImagesEqualHeightRow
-							leftSrc={asset('/photos/evolvingscript/es11-a.jpg')}
-							rightSrc={asset('/photos/evolvingscript/es11-b.jpg')}
-					leftAlt="Evolving Scripts es11-a"
-					rightAlt="Evolving Scripts es11-b"
-				/>
+								<TwoImagesEqualHeightRow
+									leftSrc={'/photos/evolvingscript/es11-a.jpg'}
+									rightSrc={'/photos/evolvingscript/es11-b.jpg'}
+									leftAlt="Evolving Scripts es11-a"
+									rightAlt="Evolving Scripts es11-b"
+								/>
 								<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
 									<Media src={'/photos/evolvingscript/es12.mp4'} alt="Evolving Scripts es12" ratio={'16 / 9'} />
 								</div>

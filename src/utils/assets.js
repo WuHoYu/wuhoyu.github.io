@@ -4,6 +4,9 @@
 export function asset(path) {
   const base = import.meta.env.VITE_ASSET_BASE || '';
   if (!path) return path;
+  // Do not re-prefix absolute URLs or already-prefixed URLs
+  if (/^https?:\/\//i.test(path)) return path;
+  if (base && path.startsWith(base)) return path;
   // Ensure we don't add duplicate slashes when concatenating
   if (!base) return path;
   if (base.endsWith('/') && path.startsWith('/')) return base.slice(0, -1) + path;
