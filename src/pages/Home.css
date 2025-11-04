@@ -274,6 +274,12 @@
 
 /* Removed mobile tag overrides to keep a single consistent look across devices */
 
+/* Home-only: prevent rare haze inside tags on dark background by disabling backdrop-filter */
+.showcase-section .tags__chip {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
 /* Home uses shared <Tags /> component for tags */
 
 .showcase-thumb {
