@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { asset } from '../../utils/assets';
 import './progressive.css';
 
@@ -45,7 +45,6 @@ export default function ProgressiveImage({
     return placeholderSrc.startsWith('data:') ? placeholderSrc : asset(placeholderSrc);
   }, [placeholderSrc]);
 
-  const ref = useRef(null);
   const wrapperStyle = { ...style };
 
   // Preserve aspect ratio if possible

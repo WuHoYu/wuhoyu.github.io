@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
-import { asset } from '../utils/assets';
 import ProgressiveImage from '../components/media/ProgressiveImage.jsx';
 import ProgressiveVideo from '../components/media/ProgressiveVideo.jsx';
 
