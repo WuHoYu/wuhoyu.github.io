@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { asset } from '../utils/assets';
 
 export default function VideoThumb({
   srcBase, 
@@ -73,8 +74,8 @@ export default function VideoThumb({
       disableRemotePlayback
       autoPlay
     >
-      <source src={`/videos/${srcBase}.webm`} type="video/webm" />
-      <source src={`/videos/${srcBase}.mp4`} type="video/mp4" />
+      <source src={asset(`/videos/${srcBase}.webm`)} type="video/webm" />
+      <source src={asset(`/videos/${srcBase}.mp4`)} type="video/mp4" />
     </video>
   );
 }

@@ -8,6 +8,7 @@ import CardClient from '../components/cards/CardClient';
 import CardTimespan from '../components/cards/CardTimespan';
 import VideoThumb from '../components/VideoThumb';
 import Tags from '../components/Tags.jsx';
+import { asset } from '../utils/assets';
 
 function GlassSection({ textColor, arrowColor, glassTheme, logos, sliderValue }) {
   return (
@@ -44,7 +45,7 @@ export default function Home() {
 
   const glassTheme = sliderValue < 60 ? 'white' : 'dark';
   const logos = getLogos(sliderValue);
-  const lockIcon = sliderValue < 60 ? '/icons/lock-light.svg' : '/icons/lock-dark.svg';
+  const lockIcon = sliderValue < 60 ? asset('/icons/lock-light.svg') : asset('/icons/lock-dark.svg');
   React.useLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return;
@@ -99,7 +100,7 @@ export default function Home() {
               <div className="showcase-thumb">
                 <img
                   className="showcase-thumb-media"
-                  src="/photos/COIES/COIES.png"
+                  src={asset('/photos/COIES/COIES.png')}
                   alt="COIES@ICON KIT thumbnail"
                   loading="lazy"
                   decoding="async"
@@ -160,7 +161,7 @@ export default function Home() {
               <div className="showcase-thumb">
                 <img
                   className="showcase-thumb-media"
-                  src="/photos/hikvision/hikvision.jpeg"
+                  src={asset('/photos/hikvision/hikvision.jpeg')}
                   alt="HIKVISION thumbnail"
                   loading="lazy"
                   decoding="async"
@@ -202,6 +203,6 @@ function getLogos(sliderValue) {
       style = { height: '80px' };
     }
     
-    return { ...logo, src, style };
+    return { ...logo, src: asset(src), style };
   });
 }

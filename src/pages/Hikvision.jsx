@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
+import { asset } from '../utils/assets';
 
 export default function Hikvision() {
 	const tags = ['EDITORIAL', 'OFFICE'];
@@ -37,19 +38,19 @@ export default function Hikvision() {
 				<div className="flex flex-col gap-[10px]" style={{ width: '100%' }}>
 					{/* 1) Hero wide */}
 					<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-						<img src="/photos/hikvision/hikvision.jpeg" alt="HIKVISION hero" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+						<img src={asset('/photos/hikvision/hikvision.jpeg')} alt="HIKVISION hero" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 					</div>
 					{/* 2) hik1 wide */}
 					<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-						<img src="/photos/hikvision/hik1.jpg" alt="HIKVISION 1" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+						<img src={asset('/photos/hikvision/hik1.jpg')} alt="HIKVISION 1" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 					</div>
 					{/* 3) Two-up row: hik2-a + hik2-b */}
 					<div className="flex gap-[10px]" style={{ width: '100%' }}>
 						<div className="rounded-[9px]" style={{ flex: 1, background: 'transparent', overflow: 'hidden' }}>
-							<img src="/photos/hikvision/hik2-a.jpg" alt="HIKVISION 2-a" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+							<img src={asset('/photos/hikvision/hik2-a.jpg')} alt="HIKVISION 2-a" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 						</div>
 						<div className="rounded-[9px]" style={{ flex: 1, background: 'transparent', overflow: 'hidden' }}>
-							<img src="/photos/hikvision/hik2-b.jpg" alt="HIKVISION 2-b" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+							<img src={asset('/photos/hikvision/hik2-b.jpg')} alt="HIKVISION 2-b" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 						</div>
 					</div>
 					{/* 4) Remaining wides in order */}
@@ -65,7 +66,7 @@ export default function Hikvision() {
 						'/photos/hikvision/hik11.jpg',
 					].map((src, idx) => (
 						<div className="rounded-[9px]" key={`hik-wide-${idx}`} style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-							<img src={src} alt={`HIKVISION ${idx + 3}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+							<img src={asset(src)} alt={`HIKVISION ${idx + 3}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 						</div>
 					))}
 				</div>

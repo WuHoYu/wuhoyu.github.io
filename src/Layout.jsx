@@ -8,6 +8,7 @@ import SiteFooter from './components/SiteFooter';
 import ScrollToTop from './components/ScrollToTop';
 import { getBackgroundColor } from './utils/background';
 import { formatClockFromPercent } from './utils/time';
+import { asset } from './utils/assets';
  
 // Using custom SVG icons from public/icons
 
@@ -69,7 +70,7 @@ export default function Layout() {
             <div className="site-logo-inner">
               <Link to="/" className="site-logo-link" aria-label="Home">
                 <img
-                  src={sliderValue < 60 ? '/icons/logoblack.png' : '/icons/logowhite.png'}
+                  src={asset(sliderValue < 60 ? '/icons/logoblack.png' : '/icons/logowhite.png')}
                   alt="Site logo"
                   loading="eager"
                   decoding="async"
@@ -150,7 +151,7 @@ export default function Layout() {
               />
               <div className="slider-time">
                 <img
-                  src={sliderValue < 60 ? '/icons/sun-d.svg' : '/icons/sun.svg'}
+                  src={asset(sliderValue < 60 ? '/icons/sun-d.svg' : '/icons/sun.svg')}
                   alt="Sun"
                   width={18}
                   height={18}
@@ -161,7 +162,7 @@ export default function Layout() {
                   {formatClockFromPercent(sliderValue)}
                 </span>
                 <img
-                  src={sliderValue < 60 ? '/icons/moon-d.svg' : '/icons/moon.svg'}
+                  src={asset(sliderValue < 60 ? '/icons/moon-d.svg' : '/icons/moon.svg')}
                   alt="Moon"
                   width={16}
                   height={16}
@@ -181,9 +182,9 @@ export default function Layout() {
       {/* 底部 Dock 菜單全局可見 */}
       <Dock
         items={useMemo(() => ([
-          { icon: <img src="/icons/homeicon.svg" alt="Home" width={22} height={22} />, label: 'Home', onClick: () => goOrScroll('/') },
-          { icon: <img src="/icons/projectsicon.svg" alt="Projects" width={22} height={22} />, label: 'Projects', onClick: () => goOrScroll('/projects') },
-          { icon: <img src="/icons/visuallabicon.svg" alt="Visual Lab" width={22} height={22} />, label: 'Visual Lab', onClick: () => goOrScroll('/visual-lab') },
+          { icon: <img src={asset('/icons/homeicon.svg')} alt="Home" width={22} height={22} />, label: 'Home', onClick: () => goOrScroll('/') },
+          { icon: <img src={asset('/icons/projectsicon.svg')} alt="Projects" width={22} height={22} />, label: 'Projects', onClick: () => goOrScroll('/projects') },
+          { icon: <img src={asset('/icons/visuallabicon.svg')} alt="Visual Lab" width={22} height={22} />, label: 'Visual Lab', onClick: () => goOrScroll('/visual-lab') },
         ]), [location.pathname])}
         panelHeight={59}
         baseItemSize={50}

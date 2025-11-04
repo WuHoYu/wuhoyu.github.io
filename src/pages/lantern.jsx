@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
+import { asset } from '../utils/assets';
 
 export default function Lantern() {
 		const tags = ['CONCEPT', 'TYPEFACE'];
@@ -99,11 +100,11 @@ export default function Lantern() {
 			<div className="flex flex-col gap-[10px]" style={{ width: '100%' }}>
 				{/* Sequence: l1, (l2-a/l2-b), l3, l4, l5, l6, l7, (l8-a/l8-b), l9, l10, l11, l12, (l13-a/l13-b) */}
 				<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-					<img src="/photos/lantern/l1.jpg" alt="Lantern l1" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+					<img src={asset('/photos/lantern/l1.jpg')} alt="Lantern l1" loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 				</div>
 				<TwoImagesEqualHeightRow
-					leftSrc="/photos/lantern/l2-a.jpg"
-					rightSrc="/photos/lantern/l2-b.jpg"
+					leftSrc={asset('/photos/lantern/l2-a.jpg')}
+					rightSrc={asset('/photos/lantern/l2-b.jpg')}
 					leftAlt="Lantern l2-a"
 					rightAlt="Lantern l2-b"
 				/>
@@ -115,12 +116,12 @@ export default function Lantern() {
 					'/photos/lantern/l7.jpg',
 				].map((src, i) => (
 					<div className="rounded-[9px]" key={`l-wide-${i}`} style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-						<img src={src} alt={`Lantern l${i + 3}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+						<img src={asset(src)} alt={`Lantern l${i + 3}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 					</div>
 				))}
 				<TwoImagesEqualHeightRow
-					leftSrc="/photos/lantern/l8-a.jpg"
-					rightSrc="/photos/lantern/l8-b.jpg"
+					leftSrc={asset('/photos/lantern/l8-a.jpg')}
+					rightSrc={asset('/photos/lantern/l8-b.jpg')}
 					leftAlt="Lantern l8-a"
 					rightAlt="Lantern l8-b"
 				/>
@@ -131,12 +132,12 @@ export default function Lantern() {
 					'/photos/lantern/l12.jpg',
 				].map((src, i) => (
 					<div className="rounded-[9px]" key={`l-wide-2-${i}`} style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-						<img src={src} alt={`Lantern l${i + 9}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+						<img src={asset(src)} alt={`Lantern l${i + 9}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 					</div>
 				))}
 				<TwoImagesEqualHeightRow
-					leftSrc="/photos/lantern/l13-a.jpg"
-					rightSrc="/photos/lantern/l13-b.jpg"
+					leftSrc={asset('/photos/lantern/l13-a.jpg')}
+					rightSrc={asset('/photos/lantern/l13-b.jpg')}
 					leftAlt="Lantern l13-a"
 					rightAlt="Lantern l13-b"
 				/>

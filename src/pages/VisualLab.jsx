@@ -1,6 +1,7 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import Masonry from '../components/Masonry';
+import { asset } from '../utils/assets';
 
 export default function VisualLab() {
   const { sliderValue = 30 } = useOutletContext() || {};
@@ -11,7 +12,7 @@ export default function VisualLab() {
     '11.jpg','12.jpg','13.jpg','14.jpg','15.jpeg','16.jpeg','17.jpeg','18.jpeg','19.png','20.png',
     '21.jpg','22.jpg','23.jpg','24.jpg'
   ];
-  const items = files.map((name, i) => ({ id: String(i + 1), img: `/visuallab/${name}`, height: 480 }));
+  const items = files.map((name, i) => ({ id: String(i + 1), img: asset(`/visuallab/${name}`), height: 480 }));
 
   return (
     <div className={themeClass} style={{ minHeight: '100vh', width: '100%', boxSizing: 'border-box' }}>

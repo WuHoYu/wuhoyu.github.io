@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
+import { asset } from '../utils/assets';
 
 function ClickToPlayVideo({ sources }) {
   const videoRef = useRef(null);
@@ -60,7 +61,7 @@ function ClickToPlayVideo({ sources }) {
     >
       <video ref={videoRef} style={videoStyle} playsInline preload="metadata">
         {sources.map((s, i) => (
-          <source key={`sttw-src-${i}`} src={s.src} type={s.type} />
+          <source key={`sttw-src-${i}`} src={asset(s.src)} type={s.type} />
         ))}
         Your browser does not support the video tag.
       </video>
@@ -150,7 +151,7 @@ function TwoVideosEqualHeightRow({ left, right }) {
           onLoadedMetadata={onMetaLeft}
         >
           {left.sources.map((s, i) => (
-            <source key={`left-${left.key}-src-${i}`} src={s.src} type={s.type} />
+            <source key={`left-${left.key}-src-${i}`} src={asset(s.src)} type={s.type} />
           ))}
           Your browser does not support the video tag.
         </video>
@@ -170,7 +171,7 @@ function TwoVideosEqualHeightRow({ left, right }) {
           onLoadedMetadata={onMetaRight}
         >
           {right.sources.map((s, i) => (
-            <source key={`right-${right.key}-src-${i}`} src={s.src} type={s.type} />
+            <source key={`right-${right.key}-src-${i}`} src={asset(s.src)} type={s.type} />
           ))}
           Your browser does not support the video tag.
         </video>
@@ -268,7 +269,7 @@ export default function Stepstotheway() {
                 const content = (
                   <video style={videoStyle} {...commonProps} preload={isClick ? 'metadata' : 'auto'}>
                     {entry.sources.map((s, i) => (
-                      <source key={`${key}-src-${i}`} src={s.src} type={s.type} />
+                      <source key={`${key}-src-${i}`} src={asset(s.src)} type={s.type} />
                     ))}
                     Your browser does not support the video tag.
                   </video>
@@ -294,7 +295,7 @@ export default function Stepstotheway() {
                   <div key={`row-nocrop-${idx}`} className="flex gap-[10px]" style={{ width: '100%', alignItems: 'flex-start' }}>
                     <div className="rounded-[9px]" style={{ flex: 1, background: 'transparent', overflow: 'hidden' }}>
                       <img
-                        src={`/photos/stepstotheway/${entry[0]}`}
+                        src={asset(`/photos/stepstotheway/${entry[0]}`)}
                         alt={`STEPS TO THE WAY ${entry[0]}`}
                         style={{ width: '100%', height: 'auto', display: 'block' }}
                         loading="lazy"
@@ -303,7 +304,7 @@ export default function Stepstotheway() {
                     </div>
                     <div className="rounded-[9px]" style={{ flex: 1, background: 'transparent', overflow: 'hidden' }}>
                       <img
-                        src={`/photos/stepstotheway/${entry[1]}`}
+                        src={asset(`/photos/stepstotheway/${entry[1]}`)}
                         alt={`STEPS TO THE WAY ${entry[1]}`}
                         style={{ width: '100%', height: 'auto', display: 'block' }}
                         loading="lazy"
@@ -318,7 +319,7 @@ export default function Stepstotheway() {
                 <div key={`row-${idx}`} className="flex gap-[10px]" style={{ width: '100%' }}>
                   <div className="rounded-[9px]" style={pairCardStyle}>
                     <img
-                      src={`/photos/stepstotheway/${entry[0]}`}
+                      src={asset(`/photos/stepstotheway/${entry[0]}`)}
                       alt={`STEPS TO THE WAY ${entry[0]}`}
                       style={twoUpImgStyle}
                       loading="lazy"
@@ -327,7 +328,7 @@ export default function Stepstotheway() {
                   </div>
                   <div className="rounded-[9px]" style={pairCardStyle}>
                     <img
-                      src={`/photos/stepstotheway/${entry[1]}`}
+                      src={asset(`/photos/stepstotheway/${entry[1]}`)}
                       alt={`STEPS TO THE WAY ${entry[1]}`}
                       style={twoUpImgStyle}
                       loading="lazy"
@@ -340,7 +341,7 @@ export default function Stepstotheway() {
             return (
               <div key={`single-${idx}`} className="rounded-[9px]" style={cardStyle}>
                 <img
-                  src={`/photos/stepstotheway/${entry}`}
+                  src={asset(`/photos/stepstotheway/${entry}`)}
                   alt={`STEPS TO THE WAY ${entry.replace(/\.(jpg|jpeg|png)$/i, '')}`}
                   style={baseImgStyle}
                   loading="lazy"

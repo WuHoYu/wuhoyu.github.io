@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
+import { asset } from '../utils/assets';
 
 export default function Hantype() {
 		const tags = ['EDITORIAL', 'RESEARCH', 'BOOK'];
@@ -99,20 +100,20 @@ export default function Hantype() {
 		>
 			<div className="flex flex-col gap-[10px]" style={{ width: '100%' }}>
 				{/* Sequence: ht1, ht2, ht3, (ht4-a/ht4-b), ht5..ht12; all natural height (no cropping) */}
-				{['/photos/typemethod/ht1.jpg','/photos/typemethod/ht2.jpg','/photos/typemethod/ht3.jpg'].map((src, i) => (
+								{['/photos/typemethod/ht1.jpg','/photos/typemethod/ht2.jpg','/photos/typemethod/ht3.jpg'].map((src, i) => (
 					<div className="rounded-[9px]" key={`ht-pre-${i}`} style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-						<img src={src} alt={`HANTYPE ht${i + 1}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+												<img src={asset(src)} alt={`HANTYPE ht${i + 1}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 					</div>
 				))}
 				<TwoImagesEqualHeightRow
-					leftSrc="/photos/typemethod/ht4-a.jpg"
-					rightSrc="/photos/typemethod/ht4-b.jpg"
+										leftSrc={asset('/photos/typemethod/ht4-a.jpg')}
+										rightSrc={asset('/photos/typemethod/ht4-b.jpg')}
 					leftAlt="HANTYPE ht4-a"
 					rightAlt="HANTYPE ht4-b"
 				/>
-				{['/photos/typemethod/ht5.jpg','/photos/typemethod/ht6.jpg','/photos/typemethod/ht7.jpg','/photos/typemethod/ht8.jpg','/photos/typemethod/ht9.jpg','/photos/typemethod/ht10.jpg','/photos/typemethod/ht11.jpg','/photos/typemethod/ht12.jpg'].map((src, i) => (
+								{['/photos/typemethod/ht5.jpg','/photos/typemethod/ht6.jpg','/photos/typemethod/ht7.jpg','/photos/typemethod/ht8.jpg','/photos/typemethod/ht9.jpg','/photos/typemethod/ht10.jpg','/photos/typemethod/ht11.jpg','/photos/typemethod/ht12.jpg'].map((src, i) => (
 					<div className="rounded-[9px]" key={`ht-post-${i}`} style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-						<img src={src} alt={`HANTYPE ht${i + 5}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
+												<img src={asset(src)} alt={`HANTYPE ht${i + 5}`} loading="lazy" decoding="async" style={{ width: '100%', height: 'auto', display: 'block' }} />
 					</div>
 				))}
 			</div>

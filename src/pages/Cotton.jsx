@@ -1,6 +1,7 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
+import { asset } from '../utils/assets';
 
 export default function Cotton() {
   const { sliderValue = 30 } = useOutletContext() || {};
@@ -19,8 +20,8 @@ export default function Cotton() {
   const imgStyle = { width: 'clamp(192px, 18vw, 320px)', height: 'auto', display: 'block' };
   const logoStack = (
     <div className="cotton-logo-stack" style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-      <img src={logoSrc} alt="Cotton logo mark" style={imgStyle} loading="lazy" decoding="async" />
-      <img src={textSrc} alt="Cotton wordmark" style={imgStyle} loading="lazy" decoding="async" />
+      <img src={asset(logoSrc)} alt="Cotton logo mark" style={imgStyle} loading="lazy" decoding="async" />
+      <img src={asset(textSrc)} alt="Cotton wordmark" style={imgStyle} loading="lazy" decoding="async" />
     </div>
   );
 
@@ -34,20 +35,20 @@ export default function Cotton() {
     return (
       <div className="flex flex-col gap-[10px]">
         <div className="rounded-[9px]" style={{ width: '100%', aspectRatio: '888 / 475', background: 'transparent', overflow: 'hidden' }}>
-          <video src="/videos/CottonOpen.mp4" autoPlay loop muted playsInline preload="auto" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+          <video src={asset('/videos/CottonOpen.mp4')} autoPlay loop muted playsInline preload="auto" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         </div>
         {rows.map((r, idx) => (
           r.two ? (
             <div className="flex gap-[10px]" key={`row-two-${idx}`}>
               {r.two.map((src, j) => (
                 <div className="rounded-[9px]" style={{ flex: 1, aspectRatio: '439 / 475', background: 'transparent', overflow: 'hidden' }} key={j}>
-                  <img src={src} alt={`Cotton ${idx + 1}${j ? '-b' : '-a'}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" decoding="async" />
+                  <img src={asset(src)} alt={`Cotton ${idx + 1}${j ? '-b' : '-a'}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" decoding="async" />
                 </div>
               ))}
             </div>
           ) : (
             <div className="rounded-[9px]" style={{ width: '100%', aspectRatio: '888 / 475', background: 'transparent', overflow: 'hidden' }} key={`row-wide-${idx}`}>
-              <img src={r.wide} alt={`Cotton ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" decoding="async" />
+              <img src={asset(r.wide)} alt={`Cotton ${idx + 1}`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} loading="lazy" decoding="async" />
             </div>
           )
         ))}

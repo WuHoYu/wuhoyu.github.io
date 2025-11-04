@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
+import { asset } from '../../utils/assets';
 
 function CardIdentity({ textColor, arrowColor, glassTheme, sliderValue }) {
   // Smooth crossfade between videos
-  const [currentSrc, setCurrentSrc] = useState('/videos/sign1.webm');
+  const [currentSrc, setCurrentSrc] = useState(asset('/videos/sign1.webm'));
   const [fade, setFade] = useState(true);
+  // Detect iOS/iPadOS Safari to apply a blend-mode fallback for WebM alpha
+  const isIOSSafari = useMemo(() => {
+    if (typeof navigator === 'undefined') return false;
+    const ua = navigator.userAgent || '';
+    const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+    const isSafari = /Safari\//.test(ua) && !/Chrome\//.test(ua) && !/CriOS\//.test(ua);
+    return isIOS && isSafari;
+  }, []);
   useEffect(() => {
-    let nextSrc = '/videos/sign1.webm';
+    let nextSrc = asset('/videos/sign1.webm');
     if (sliderValue > 40 && sliderValue < 80) {
-      nextSrc = '/videos/sign2.webm';
+      nextSrc = asset('/videos/sign2.webm');
     }
     if (nextSrc !== currentSrc) {
       setFade(false);
@@ -73,6 +82,11 @@ function CardIdentity({ textColor, arrowColor, glassTheme, sliderValue }) {
                     maxWidth: '100%',
                     objectFit: 'contain', /* centers sign1 and sign2 equally */
                     display: 'block',
+                    // Safari iOS lacks WebM alpha; blend onto background instead of showing black fill
+                    mixBlendMode: isIOSSafari ? 'screen' : 'normal',
+                    WebkitBackfaceVisibility: 'hidden',
+                    backfaceVisibility: 'hidden',
+                    transform: 'translateZ(0)',
                     pointerEvents: 'none',
                     userSelect: 'none',
                     opacity: fade ? 1 : 0,

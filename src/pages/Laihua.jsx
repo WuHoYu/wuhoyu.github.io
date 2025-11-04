@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
+import { asset } from '../utils/assets';
 
 export default function Laihua() {
 	const tags = ['LANDING', 'EDITORIAL', 'BOOK'];
@@ -30,7 +31,7 @@ export default function Laihua() {
 				].map((item, i) => (
 					<div className="rounded-[9px]" key={`laihua-${i}`} style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
 						<img
-							src={item.src}
+							src={asset(item.src)}
 							alt={item.alt}
 							loading="lazy"
 							decoding="async"
