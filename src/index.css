@@ -123,6 +123,4 @@ img, video {
   transition-delay: var(--pe-delay, 0ms);
 }
 
-/* Global constant blur-up: stays blurred until 'is-ready' is applied by JS */
-.blur-on-load { filter: blur(14px); transition: filter 280ms ease-in; }
-.blur-on-load.is-ready { filter: none; }
+
