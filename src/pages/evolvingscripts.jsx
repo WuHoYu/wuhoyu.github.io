@@ -13,8 +13,6 @@ export default function EvolvingScripts() {
 		const [cw, setCw] = useState(0);
 		const [r1, setR1] = useState(null); // width/height
 		const [r2, setR2] = useState(null);
-		const [l1, setL1] = useState(false);
-		const [l2, setL2] = useState(false);
 
 		useEffect(() => {
 			const el = containerRef.current;
@@ -42,41 +40,35 @@ export default function EvolvingScripts() {
 			w2 = r2 * h;
 		}
 
-		const rowStyle = { width: '100%', display: 'flex', gap: `${gap}px`, alignItems: 'flex-start' };
-		const tileCommon = { background: 'transparent', overflow: 'hidden', borderRadius: '9px', position: 'relative' };
-		const fallbackTileStyle = { flex: 1, ...tileCommon, aspectRatio: '16 / 9' };
+	const rowStyle = { width: '100%', display: 'flex', gap: `${gap}px`, alignItems: 'flex-start' };
+	const tileCommon = { background: 'transparent', overflow: 'hidden', borderRadius: '9px' };
+	const fallbackTileStyle = { flex: 1, ...tileCommon };
 		const imgStyleSized = { width: '100%', height: '100%', objectFit: 'contain', display: 'block' };
 		const imgStyleAuto = { width: '100%', height: 'auto', display: 'block' };
 
 			return (
 			<div ref={containerRef} style={rowStyle}>
 				<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w1}px`, height: `${h}px` } : fallbackTileStyle}>
-					{!l1 && <div className="prog-ph" />}
 					<img
 							src={leftSrc}
 						alt={leftAlt}
 						onLoad={(e) => {
 							const img = e.currentTarget;
 							if (img.naturalWidth && img.naturalHeight) setR1(img.naturalWidth / img.naturalHeight);
-							setL1(true);
 						}}
-						className={`prog-media ${l1 ? 'is-ready' : ''}`}
 						style={h ? imgStyleSized : imgStyleAuto}
 						loading="lazy"
 						decoding="async"
 					/>
 				</div>
 				<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w2}px`, height: `${h}px` } : fallbackTileStyle}>
-					{!l2 && <div className="prog-ph" />}
 					<img
 								src={rightSrc}
 						alt={rightAlt}
 						onLoad={(e) => {
 							const img = e.currentTarget;
 							if (img.naturalWidth && img.naturalHeight) setR2(img.naturalWidth / img.naturalHeight);
-							setL2(true);
 						}}
-						className={`prog-media ${l2 ? 'is-ready' : ''}`}
 						style={h ? imgStyleSized : imgStyleAuto}
 						loading="lazy"
 						decoding="async"
@@ -86,43 +78,37 @@ export default function EvolvingScripts() {
 		);
 	}
 
-	function Media({ src, alt, loopOverride, ratio = '16 / 9' }) {
+	function Media({ src, alt, loopOverride }) {
 		const isVideo = /\.(mp4|mov)$/i.test(src);
-		const [loaded, setLoaded] = useState(false);
+		const [ready, setReady] = useState(false);
 		if (isVideo) {
 			const shouldLoop = loopOverride ?? true;
             const isEs6 = /\/es6\.mp4$/i.test(src);
 			return (
-				<div className="prog-wrap" style={{ aspectRatio: ratio }}>
-					<video
-							src={asset(src)}
-						aria-label={alt}
-						muted
-						playsInline
-						autoPlay
-						{...(shouldLoop ? { loop: true } : {})}
-						preload="metadata"
-						onLoadedData={() => setLoaded(true)}
-						className={`prog-media ${loaded ? 'is-ready' : ''}`}
-						style={{ width: '100%', height: 'auto', display: 'block', WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'translateZ(0)', ...(isEs6 ? { clipPath: 'inset(0px 0px 1px 0px)' } : {}) }}
-					/>
-					{!loaded && <div className="prog-ph" />}
-				</div>
+				<video
+						src={asset(src)}
+					aria-label={alt}
+					muted
+					playsInline
+					autoPlay
+					{...(shouldLoop ? { loop: true } : {})}
+					preload="metadata"
+					onLoadedData={() => setReady(true)}
+					className={`blur-on-load ${ready ? 'is-ready' : ''}`}
+					style={{ width: '100%', height: 'auto', display: 'block', WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'translateZ(0)', ...(isEs6 ? { clipPath: 'inset(0px 0px 1px 0px)' } : {}) }}
+				/>
 			);
 		}
 		return (
-			<div className="prog-wrap" style={{ aspectRatio: ratio }}>
-				<img
-						src={asset(src)}
-					alt={alt}
-					onLoad={() => setLoaded(true)}
-					loading="lazy"
-					decoding="async"
-					className={`prog-media ${loaded ? 'is-ready' : ''}`}
-					style={{ width: '100%', height: 'auto', display: 'block' }}
-				/>
-				{!loaded && <div className="prog-ph" />}
-			</div>
+			<img
+					src={asset(src)}
+				alt={alt}
+				onLoad={() => setReady(true)}
+				loading="lazy"
+				decoding="async"
+				className={`blur-on-load ${ready ? 'is-ready' : ''}`}
+				style={{ width: '100%', height: 'auto', display: 'block' }}
+			/>
 		);
 	}
 
@@ -171,12 +157,9 @@ export default function EvolvingScripts() {
 				</div>
 			</div>
 			<style>{`
-				/* Progressive blur-up only for Evolving Scripts page */
-				.prog-wrap { position: relative; width: 100%; height: auto; }
-				.prog-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: blur(16px); transform: scale(1.02); opacity: 0.85; transition: filter 600ms cubic-bezier(0.22,1,0.36,1), transform 600ms cubic-bezier(0.22,1,0.36,1), opacity 300ms ease; will-change: filter, transform, opacity; }
-				.prog-media.is-ready { filter: none; transform: none; opacity: 1; }
-				.prog-ph { position: absolute; inset: 0; background: rgba(200,200,200,0.16); }
-				.theme-dark .prog-ph { background: rgba(255,255,255,0.06); }
+				/* Constant blur until reveal; no placeholders; no absolute media */
+				.blur-on-load { filter: blur(14px); transition: filter 280ms ease-in; }
+				.blur-on-load.is-ready { filter: none; }
 			`}</style>
 		</ProjectTemplate>
 	);
