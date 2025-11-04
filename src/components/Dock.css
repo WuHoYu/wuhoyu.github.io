@@ -103,3 +103,36 @@
   display: block;
   
 }
+
+/* Touch devices (phones/tablets): make icons larger without affecting desktop */
+@media (hover: none), (pointer: coarse) {
+  .dock-icon img,
+  .dock-icon svg {
+    width: 68%;
+    height: 68%;
+    max-width: 80%;
+    max-height: 80%;
+  }
+}
+
+/* Narrow screens: slightly larger icons for visual parity with desktop */
+@media (max-width: 740px) {
+  .dock-icon img,
+  .dock-icon svg {
+    width: 68%;
+    height: 68%;
+    max-width: 80%;
+    max-height: 80%;
+  }
+}
+
+/* Tablet range: moderate increase */
+@media (min-width: 740px) and (max-width: 1024px) {
+  .dock-icon img,
+  .dock-icon svg {
+    width: 56%;
+    height: 56%;
+    max-width: 70%;
+    max-height: 70%;
+  }
+}
