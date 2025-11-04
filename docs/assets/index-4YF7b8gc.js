@@ -212,13 +212,11 @@ Please change the parent <Route path="${R}"> to <Route path="${R==="/"?"*":`${R}
         :root, .theme-dark {
           --tag-text: #e8e8e8;
           --tag-bg: rgba(177, 177, 177, 0.6);
-          --tag-border: rgba(255,255,255,0.25);
           --tag-blend: hard-light;
         }
         .theme-light {
           --tag-text: #1b1a1e;
           --tag-bg: rgba(0, 0, 0, 0.08);
-          --tag-border: rgba(0,0,0,0.12);
           --tag-blend: normal;
         }
         .project-left .left-inner { width: 100%; }
@@ -249,7 +247,6 @@ Please change the parent <Route path="${R}"> to <Route path="${R==="/"?"*":`${R}
           .theme-dark {
             --tag-blend: normal;
             --tag-bg: rgba(255,255,255,0.18);
-            --tag-border: rgba(255,255,255,0.22);
           }
         }
         .pt-enter .pt-item { opacity: 0; transform: translateY(10px); }
