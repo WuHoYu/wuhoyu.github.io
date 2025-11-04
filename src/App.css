@@ -1,10 +1,6 @@
-/* Glass card shared styles */
-.glass-card {
-	background: rgba(26,26,26,0.20);
-	background-blend-mode: plus-lighter;
-	backdrop-filter: blur(25px);
-}
 /* App.css */
+/* Note: Glass card base styles live in index.css.
+   Avoid global background or blend modes here to prevent artifacts on Home. */
 
 
 
