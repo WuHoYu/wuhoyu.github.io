@@ -10,6 +10,15 @@ const _MOTION = motion;
 function DockItem({ children, className = '', onClick, mouseX, spring, distance, magnification, baseItemSize }) {
   const ref = useRef(null);
   const isHovered = useMotionValue(0);
+  // Detect coarse pointer (touch) to avoid sticky hover on mobile/tablet
+  const isCoarsePointer = (() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return false;
+    try {
+      return window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    } catch {
+      return false;
+    }
+  })();
 
   const mouseDistance = useTransform(mouseX, val => {
     const rect = ref.current?.getBoundingClientRect() ?? {
@@ -22,6 +31,17 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
   const targetSize = useTransform(mouseDistance, [-distance, 0, distance], [baseItemSize, magnification, baseItemSize]);
   const size = useSpring(targetSize, spring);
 
+  const handleHoverStart = () => { if (!isCoarsePointer) isHovered.set(1); };
+  const handleHoverEnd = () => { if (!isCoarsePointer) isHovered.set(0); };
+  const handleFocus = () => { if (!isCoarsePointer) isHovered.set(1); };
+  const handleBlur = () => { isHovered.set(0); };
+  const handleClick = (e) => {
+    if (typeof onClick === 'function') onClick(e);
+    // Immediately clear any hover/focus after tap/click
+    isHovered.set(0);
+    if (ref.current && typeof ref.current.blur === 'function') ref.current.blur();
+  };
+
   return (
     <motion.div
       ref={ref}
@@ -29,11 +49,12 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
         width: size,
         height: size
       }}
-      onHoverStart={() => isHovered.set(1)}
-      onHoverEnd={() => isHovered.set(0)}
-      onFocus={() => isHovered.set(1)}
-      onBlur={() => isHovered.set(0)}
-      onClick={onClick}
+      onHoverStart={handleHoverStart}
+      onHoverEnd={handleHoverEnd}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
+      onPointerUp={handleBlur}
+      onClick={handleClick}
       className={`dock-item ${className}`}
       tabIndex={0}
       role="button"
@@ -102,6 +123,11 @@ export default function Dock({
           mouseX.set(pageX);
         }}
         onMouseLeave={() => {
+          isHovered.set(0);
+          mouseX.set(Infinity);
+        }}
+        onTouchStart={() => {
+          // On touch, don't keep hover; ensure magnification is neutral
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
