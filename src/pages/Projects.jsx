@@ -2,7 +2,7 @@ import React from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 import Tags from '../components/Tags.jsx';
 import './Home.css';
-import ProgressiveImage from '../components/media/ProgressiveImage.jsx';
+import { asset } from '../utils/assets';
 
 export default function Projects() {
   const rootRef = React.useRef(null);
@@ -80,14 +80,6 @@ export default function Projects() {
 // tags rendered with shared <Tags /> component to match homepage
 
 function ProjCard({ title, href, tags = [], isDark, arrowColor, thumb }) {
-  // derive placeholder path: /photos/x/y.ext -> /photos/x/tiny/y-tiny.jpg
-  const ph = (() => {
-    const m = (thumb || '').match(/^\/photos\/(.+)\/(.+?)\.(png|jpe?g)$/i);
-    if (!m) return undefined;
-    const dir = m[1];
-    const base = m[2];
-    return `/photos/${dir}/tiny/${base}-tiny.jpg`;
-  })();
   return (
     <div
       className={`pe-item projects-card glass-card ${isDark ? 'dark' : 'white'}`}
@@ -119,26 +111,24 @@ function ProjCard({ title, href, tags = [], isDark, arrowColor, thumb }) {
         {href ? (
           <Link className="showcase-thumb-link" to={href} aria-label={`${title} preview`}>
             <div className="showcase-thumb">
-              <ProgressiveImage
-                src={thumb}
-                placeholderSrc={ph}
+              <img
+                className="showcase-thumb-media"
+                src={asset(thumb)}
                 alt={`${title} thumbnail`}
-                aspectRatio={'16 / 9'}
-                imgClassName="showcase-thumb-media"
-                priority
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </Link>
         ) : (
           <div className="showcase-thumb-link" aria-hidden>
             <div className="showcase-thumb">
-              <ProgressiveImage
-                src={thumb}
-                placeholderSrc={ph}
+              <img
+                className="showcase-thumb-media"
+                src={asset(thumb)}
                 alt=""
-                aspectRatio={'16 / 9'}
-                imgClassName="showcase-thumb-media"
-                priority
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>

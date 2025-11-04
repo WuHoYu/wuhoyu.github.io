@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
-import ProgressiveImage from '../components/media/ProgressiveImage.jsx';
-import ProgressiveVideo from '../components/media/ProgressiveVideo.jsx';
 
 export default function EvolvingScripts() {
 		const tags = ['CONCEPT', 'UIUX', 'APP', 'EDUCATION'];
@@ -42,40 +40,35 @@ export default function EvolvingScripts() {
 		}
 
 		const rowStyle = { width: '100%', display: 'flex', gap: `${gap}px`, alignItems: 'flex-start' };
-		const tileCommon = { background: 'transparent', overflow: 'hidden', borderRadius: '9px' };
+        const tileCommon = { background: 'transparent', overflow: 'hidden', borderRadius: '9px' };
 		const fallbackTileStyle = { flex: 1, ...tileCommon };
-
-			// derive tiny placeholders for es2-a/b when in evolvingscript folder
-			const tinyFor = (p) => {
-				const m = (p || '').match(/^\/photos\/evolvingscript\/(.+?)\.(png|jpe?g)$/i);
-				if (!m) return undefined;
-				return `/photos/evolvingscript/tiny/${m[1]}-tiny.jpg`;
-			};
 
 			return (
 				<div ref={containerRef} style={rowStyle}>
 					<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w1}px`, height: `${h}px` } : fallbackTileStyle}>
-						<ProgressiveImage
+						<img
 							src={leftSrc}
-							placeholderSrc={tinyFor(leftSrc)}
 							alt={leftAlt}
-							aspectRatio={h ? `${w1} / ${h}` : undefined}
+							loading="lazy"
+							decoding="async"
 							onLoad={(e) => {
 								const img = e.currentTarget;
 								if (img.naturalWidth && img.naturalHeight) setR1(img.naturalWidth / img.naturalHeight);
 							}}
+							style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
 						/>
 					</div>
 					<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w2}px`, height: `${h}px` } : fallbackTileStyle}>
-						<ProgressiveImage
+						<img
 							src={rightSrc}
-							placeholderSrc={tinyFor(rightSrc)}
 							alt={rightAlt}
-							aspectRatio={h ? `${w2} / ${h}` : undefined}
+							loading="lazy"
+							decoding="async"
 							onLoad={(e) => {
 								const img = e.currentTarget;
 								if (img.naturalWidth && img.naturalHeight) setR2(img.naturalWidth / img.naturalHeight);
 							}}
+							style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
 						/>
 					</div>
 				</div>
@@ -86,28 +79,22 @@ export default function EvolvingScripts() {
 		const isVideo = /\.(mp4|mov)$/i.test(src);
 		if (isVideo) {
 			const shouldLoop = loopOverride ?? true;
-            const isEs6 = /\/es6\.mp4$/i.test(src);
-						return (
-							<ProgressiveVideo
-								src={src}
-								posterSrc={undefined}
-								aspectRatio={"16 / 9"}
-								loop={!!shouldLoop}
-								autoPlay
-								muted
-								playsInline
-								preload="metadata"
-								videoStyle={isEs6 ? { clipPath: 'inset(0px 0px 1px 0px)' } : undefined}
-							/>
-						);
+      const isEs6 = /\/es6\.mp4$/i.test(src);
+			return (
+				<video
+					src={src}
+					autoPlay
+					muted
+					loop={!!shouldLoop}
+					playsInline
+					preload="metadata"
+					style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', ...(isEs6 ? { clipPath: 'inset(0px 0px 1px 0px)' } : {}) }}
+				/>
+			);
 		}
-				return (
-					<ProgressiveImage
-						src={src}
-						alt={alt}
-						aspectRatio={"16 / 9"}
-					/>
-				);
+		return (
+			<img src={src} alt={alt} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+		);
 	}
 
 	return (
@@ -122,13 +109,13 @@ export default function EvolvingScripts() {
 			<div className="flex flex-col gap-[10px]" style={{ width: '100%' }}>
 				{/* Sequence: es1, (es2-a/es2-b), es3, es4, es5, es6.mp4, es7, es8.mp4, es9, es10.mp4, es11-a, es11-b, es12.mp4 */}
 									<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-														<ProgressiveImage
-											src={'/photos/evolvingscript/es1.jpg'}
-											placeholderSrc={'/photos/evolvingscript/tiny/es1-tiny.jpg'}
-											alt="Evolving Scripts es1"
-															aspectRatio={'16 / 9'}
-															priority
-										/>
+														<img
+															src={'/photos/evolvingscript/es1.jpg'}
+															alt="Evolving Scripts es1"
+															loading="lazy"
+															decoding="async"
+															style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+														/>
 									</div>
 				<TwoImagesEqualHeightRow
 										leftSrc={'/photos/evolvingscript/es2-a.png'}
@@ -150,7 +137,7 @@ export default function EvolvingScripts() {
 												{/\.(mp4|mov)$/i.test(item.src) ? (
 													<Media src={item.src} alt={item.alt} loopOverride={item.loopOverride} ratio={'16 / 9'} />
 												) : (
-													<ProgressiveImage src={item.src} placeholderSrc={item.ph} alt={item.alt} aspectRatio={'16 / 9'} />
+													<img src={item.src} alt={item.alt} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
 												)}
 					</div>
 				))}
