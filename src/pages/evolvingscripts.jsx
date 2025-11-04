@@ -46,32 +46,41 @@ export default function EvolvingScripts() {
 		const tileCommon = { background: 'transparent', overflow: 'hidden', borderRadius: '9px' };
 		const fallbackTileStyle = { flex: 1, ...tileCommon };
 
+			// derive tiny placeholders for es2-a/b when in evolvingscript folder
+			const tinyFor = (p) => {
+				const m = (p || '').match(/^\/photos\/evolvingscript\/(.+?)\.(png|jpe?g)$/i);
+				if (!m) return undefined;
+				return `/photos/evolvingscript/tiny/${m[1]}-tiny.jpg`;
+			};
+
 			return (
-			<div ref={containerRef} style={rowStyle}>
-				<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w1}px`, height: `${h}px` } : fallbackTileStyle}>
-										<ProgressiveImage
-											src={leftSrc}
-											alt={leftAlt}
-											aspectRatio={h ? `${w1} / ${h}` : undefined}
-											onLoad={(e) => {
-												const img = e.currentTarget;
-												if (img.naturalWidth && img.naturalHeight) setR1(img.naturalWidth / img.naturalHeight);
-											}}
-										/>
+				<div ref={containerRef} style={rowStyle}>
+					<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w1}px`, height: `${h}px` } : fallbackTileStyle}>
+						<ProgressiveImage
+							src={leftSrc}
+							placeholderSrc={tinyFor(leftSrc)}
+							alt={leftAlt}
+							aspectRatio={h ? `${w1} / ${h}` : undefined}
+							onLoad={(e) => {
+								const img = e.currentTarget;
+								if (img.naturalWidth && img.naturalHeight) setR1(img.naturalWidth / img.naturalHeight);
+							}}
+						/>
+					</div>
+					<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w2}px`, height: `${h}px` } : fallbackTileStyle}>
+						<ProgressiveImage
+							src={rightSrc}
+							placeholderSrc={tinyFor(rightSrc)}
+							alt={rightAlt}
+							aspectRatio={h ? `${w2} / ${h}` : undefined}
+							onLoad={(e) => {
+								const img = e.currentTarget;
+								if (img.naturalWidth && img.naturalHeight) setR2(img.naturalWidth / img.naturalHeight);
+							}}
+						/>
+					</div>
 				</div>
-				<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w2}px`, height: `${h}px` } : fallbackTileStyle}>
-										<ProgressiveImage
-											src={rightSrc}
-											alt={rightAlt}
-											aspectRatio={h ? `${w2} / ${h}` : undefined}
-											onLoad={(e) => {
-												const img = e.currentTarget;
-												if (img.naturalWidth && img.naturalHeight) setR2(img.naturalWidth / img.naturalHeight);
-											}}
-										/>
-				</div>
-			</div>
-		);
+			);
 	}
 
 	function Media({ src, alt, loopOverride }) {

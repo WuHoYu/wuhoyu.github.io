@@ -2,6 +2,7 @@ import React from 'react';
 import { useOutletContext, Link } from 'react-router-dom';
 import Tags from '../components/Tags.jsx';
 import './Home.css';
+import ProgressiveImage from '../components/media/ProgressiveImage.jsx';
 
 export default function Projects() {
   const rootRef = React.useRef(null);
@@ -79,6 +80,14 @@ export default function Projects() {
 // tags rendered with shared <Tags /> component to match homepage
 
 function ProjCard({ title, href, tags = [], isDark, arrowColor, thumb }) {
+  // derive placeholder path: /photos/x/y.ext -> /photos/x/tiny/y-tiny.jpg
+  const ph = (() => {
+    const m = (thumb || '').match(/^\/photos\/(.+)\/(.+?)\.(png|jpe?g)$/i);
+    if (!m) return undefined;
+    const dir = m[1];
+    const base = m[2];
+    return `/photos/${dir}/tiny/${base}-tiny.jpg`;
+  })();
   return (
     <div
       className={`pe-item projects-card glass-card ${isDark ? 'dark' : 'white'}`}
@@ -110,24 +119,24 @@ function ProjCard({ title, href, tags = [], isDark, arrowColor, thumb }) {
         {href ? (
           <Link className="showcase-thumb-link" to={href} aria-label={`${title} preview`}>
             <div className="showcase-thumb">
-              <img
+              <ProgressiveImage
                 className="showcase-thumb-media"
                 src={thumb}
+                placeholderSrc={ph}
                 alt={`${title} thumbnail`}
-                loading="lazy"
-                decoding="async"
+                aspectRatio={'16 / 9'}
               />
             </div>
           </Link>
         ) : (
           <div className="showcase-thumb-link" aria-hidden>
             <div className="showcase-thumb">
-              <img
+              <ProgressiveImage
                 className="showcase-thumb-media"
                 src={thumb}
+                placeholderSrc={ph}
                 alt=""
-                loading="lazy"
-                decoding="async"
+                aspectRatio={'16 / 9'}
               />
             </div>
           </div>
