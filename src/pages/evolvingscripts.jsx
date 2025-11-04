@@ -80,7 +80,6 @@ export default function EvolvingScripts() {
 
 	function Media({ src, alt, loopOverride }) {
 		const isVideo = /\.(mp4|mov)$/i.test(src);
-		const [ready, setReady] = useState(false);
 		if (isVideo) {
 			const shouldLoop = loopOverride ?? true;
             const isEs6 = /\/es6\.mp4$/i.test(src);
@@ -93,8 +92,7 @@ export default function EvolvingScripts() {
 					autoPlay
 					{...(shouldLoop ? { loop: true } : {})}
 					preload="metadata"
-					onLoadedData={() => setReady(true)}
-					className={`blur-on-load ${ready ? 'is-ready' : ''}`}
+					className=""
 					style={{ width: '100%', height: 'auto', display: 'block', WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'translateZ(0)', ...(isEs6 ? { clipPath: 'inset(0px 0px 1px 0px)' } : {}) }}
 				/>
 			);
@@ -103,10 +101,9 @@ export default function EvolvingScripts() {
 			<img
 					src={asset(src)}
 				alt={alt}
-				onLoad={() => setReady(true)}
 				loading="lazy"
 				decoding="async"
-				className={`blur-on-load ${ready ? 'is-ready' : ''}`}
+				className=""
 				style={{ width: '100%', height: 'auto', display: 'block' }}
 			/>
 		);
@@ -156,11 +153,7 @@ export default function EvolvingScripts() {
 							<Media src={'/photos/evolvingscript/es12.mp4'} alt="Evolving Scripts es12" ratio={'16 / 9'} />
 				</div>
 			</div>
-			<style>{`
-				/* Constant blur until reveal; no placeholders; no absolute media */
-				.blur-on-load { filter: blur(14px); transition: filter 280ms ease-in; }
-				.blur-on-load.is-ready { filter: none; }
-			`}</style>
+            
 		</ProjectTemplate>
 	);
 }
