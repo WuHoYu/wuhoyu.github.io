@@ -1,7 +1,13 @@
 .logoloop {
   position: relative;
-  overflow-x: hidden;
+  /* Prevent mini scrollbars when items scale on hover */
+  overflow: hidden; /* hide both x and y */
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
 
+
+/* Hide WebKit scrollbars defensively if any nested element becomes scrollable */
+.logoloop::-webkit-scrollbar { display: none; }
   --logoloop-gap: 32px;
   --logoloop-logoHeight: 40px;
   --logoloop-fadeColorAuto: #ffffff;
