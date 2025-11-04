@@ -4,3 +4,5 @@
 .pg-img__ph--solid{background:rgba(180,180,180,0.2)}
 .pg-img__full{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .45s ease}
 .pg-img__full.pg-visible{opacity:1}
+.pg-vid__full{opacity:0;transition:opacity .45s ease}
+.pg-vid__full.pg-visible{opacity:1}

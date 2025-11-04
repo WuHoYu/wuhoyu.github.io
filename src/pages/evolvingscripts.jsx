@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
 import { asset } from '../utils/assets';
+import ProgressiveImage from '../components/media/ProgressiveImage.jsx';
+import ProgressiveVideo from '../components/media/ProgressiveVideo.jsx';
 
 export default function EvolvingScripts() {
 		const tags = ['CONCEPT', 'UIUX', 'APP', 'EDUCATION'];
@@ -40,39 +42,33 @@ export default function EvolvingScripts() {
 			w2 = r2 * h;
 		}
 
-	const rowStyle = { width: '100%', display: 'flex', gap: `${gap}px`, alignItems: 'flex-start' };
-	const tileCommon = { background: 'transparent', overflow: 'hidden', borderRadius: '9px' };
-	const fallbackTileStyle = { flex: 1, ...tileCommon };
-		const imgStyleSized = { width: '100%', height: '100%', objectFit: 'contain', display: 'block' };
-		const imgStyleAuto = { width: '100%', height: 'auto', display: 'block' };
+		const rowStyle = { width: '100%', display: 'flex', gap: `${gap}px`, alignItems: 'flex-start' };
+		const tileCommon = { background: 'transparent', overflow: 'hidden', borderRadius: '9px' };
+		const fallbackTileStyle = { flex: 1, ...tileCommon };
 
 			return (
 			<div ref={containerRef} style={rowStyle}>
 				<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w1}px`, height: `${h}px` } : fallbackTileStyle}>
-					<img
-							src={leftSrc}
-						alt={leftAlt}
-						onLoad={(e) => {
-							const img = e.currentTarget;
-							if (img.naturalWidth && img.naturalHeight) setR1(img.naturalWidth / img.naturalHeight);
-						}}
-						style={h ? imgStyleSized : imgStyleAuto}
-						loading="lazy"
-						decoding="async"
-					/>
+										<ProgressiveImage
+											src={leftSrc}
+											alt={leftAlt}
+											aspectRatio={h ? `${w1} / ${h}` : undefined}
+											onLoad={(e) => {
+												const img = e.currentTarget;
+												if (img.naturalWidth && img.naturalHeight) setR1(img.naturalWidth / img.naturalHeight);
+											}}
+										/>
 				</div>
 				<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w2}px`, height: `${h}px` } : fallbackTileStyle}>
-					<img
-								src={rightSrc}
-						alt={rightAlt}
-						onLoad={(e) => {
-							const img = e.currentTarget;
-							if (img.naturalWidth && img.naturalHeight) setR2(img.naturalWidth / img.naturalHeight);
-						}}
-						style={h ? imgStyleSized : imgStyleAuto}
-						loading="lazy"
-						decoding="async"
-					/>
+										<ProgressiveImage
+											src={rightSrc}
+											alt={rightAlt}
+											aspectRatio={h ? `${w2} / ${h}` : undefined}
+											onLoad={(e) => {
+												const img = e.currentTarget;
+												if (img.naturalWidth && img.naturalHeight) setR2(img.naturalWidth / img.naturalHeight);
+											}}
+										/>
 				</div>
 			</div>
 		);
@@ -83,30 +79,27 @@ export default function EvolvingScripts() {
 		if (isVideo) {
 			const shouldLoop = loopOverride ?? true;
             const isEs6 = /\/es6\.mp4$/i.test(src);
-			return (
-				<video
-						src={asset(src)}
-					aria-label={alt}
-					muted
-					playsInline
-					autoPlay
-					{...(shouldLoop ? { loop: true } : {})}
-					preload="metadata"
-					className=""
-					style={{ width: '100%', height: 'auto', display: 'block', WebkitBackfaceVisibility: 'hidden', backfaceVisibility: 'hidden', transform: 'translateZ(0)', ...(isEs6 ? { clipPath: 'inset(0px 0px 1px 0px)' } : {}) }}
-				/>
-			);
+						return (
+							<ProgressiveVideo
+								src={src}
+								posterSrc={undefined}
+								aspectRatio={"16 / 9"}
+								loop={!!shouldLoop}
+								autoPlay
+								muted
+								playsInline
+								preload="metadata"
+								videoStyle={isEs6 ? { clipPath: 'inset(0px 0px 1px 0px)' } : undefined}
+							/>
+						);
 		}
-		return (
-			<img
-					src={asset(src)}
-				alt={alt}
-				loading="lazy"
-				decoding="async"
-				className=""
-				style={{ width: '100%', height: 'auto', display: 'block' }}
-			/>
-		);
+				return (
+					<ProgressiveImage
+						src={src}
+						alt={alt}
+						aspectRatio={"16 / 9"}
+					/>
+				);
 	}
 
 	return (
@@ -124,8 +117,8 @@ export default function EvolvingScripts() {
 							<Media src={'/photos/evolvingscript/es1.jpg'} alt="Evolving Scripts es1" ratio={'16 / 9'} />
 						</div>
 				<TwoImagesEqualHeightRow
-							leftSrc={asset('/photos/evolvingscript/es2-a.png')}
-							rightSrc={asset('/photos/evolvingscript/es2-b.jpg')}
+										leftSrc={'/photos/evolvingscript/es2-a.png'}
+										rightSrc={'/photos/evolvingscript/es2-b.jpg'}
 					leftAlt="Evolving Scripts es2-a"
 					rightAlt="Evolving Scripts es2-b"
 				/>
