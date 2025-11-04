@@ -56,15 +56,13 @@ export default function Projects() {
           --text-primary: #ffffff;
           --text-muted: rgba(255,255,255,0.4);
           --tag-text: #e8e8e8;
-          --tag-bg: rgba(177, 177, 177, 0.6);
-          --tag-blend: hard-light;
+          --tag-bg: rgba(160,160,160,0.28);
         }
         .theme-light {
           --text-primary: #1b1a1e;
           --text-muted: rgba(27,26,30,0.4);
           --tag-text: #1b1a1e;
           --tag-bg: rgba(0, 0, 0, 0.08);
-          --tag-blend: normal;
         }
         .text-primary { color: var(--text-primary); }
         .text-muted { color: var(--text-muted); }

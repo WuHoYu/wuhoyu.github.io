@@ -244,15 +244,13 @@ export default function ProjectTemplate({
         .text-primary { color: var(--text-primary); }
         .text-muted { color: var(--text-muted); }
         .project-left hr { border-top: 1px solid var(--divider-color) !important; }
-        :root, .theme-dark {
+        .theme-dark {
           --tag-text: #e8e8e8;
-          --tag-bg: rgba(177, 177, 177, 0.6);
-          --tag-blend: hard-light;
+          --tag-bg: rgba(160,160,160,0.28);
         }
         .theme-light {
           --tag-text: #1b1a1e;
           --tag-bg: rgba(0, 0, 0, 0.08);
-          --tag-blend: normal;
         }
         .project-left .left-inner { width: 100%; }
         .project-left .tag-row { display: grid; grid-template-columns: auto 1fr; column-gap: var(--label-gap, 8px); align-items: start; }
@@ -278,11 +276,7 @@ export default function ProjectTemplate({
           .project-left { position: static; left: auto; width: auto; padding: 16px !important; }
           .project-right { padding: 16px !important; margin-left: 0 !important; }
           .project-left .tags-fixed { max-width: 100%; }
-          /* iPhone Safari can render hard-light to pure black on dark bg; normalize chip blend/bg on small screens */
-          .theme-dark {
-            --tag-blend: normal;
-            --tag-bg: rgba(255,255,255,0.18);
-          }
+          /* Unified tags: no separate mobile override */
         }
         .pt-enter .pt-item { opacity: 0; transform: translateY(10px); }
         .pt-enter-active .pt-item {

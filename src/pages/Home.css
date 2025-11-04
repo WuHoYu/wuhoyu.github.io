@@ -263,46 +263,18 @@
   flex-wrap: wrap;
 }
 
-.showcase-section {
-  --tag-text: #e8e8e8;
-  --tag-bg: rgba(177, 177, 177, 0.6);
-  --tag-blend: hard-light;
-}
 .showcase-section.theme-light {
   --tag-text: #1b1a1e;
   --tag-bg: rgba(0, 0, 0, 0.08);
-  --tag-blend: normal;
 }
 .showcase-section.theme-dark {
   --tag-text: #e8e8e8;
-  --tag-bg: rgba(177, 177, 177, 0.6);
-  --tag-blend: hard-light;
+  --tag-bg: rgba(160, 160, 160, 0.28);
 }
 
-/* Normalize tag chips on small screens (iOS Safari) to avoid dark hard-light artifacts */
-@media (max-width: 739.98px) {
-  .showcase-section.theme-dark {
-    --tag-blend: normal;
-    --tag-bg: rgba(255, 255, 255, 0.18);
-  }
-}
+/* Removed mobile tag overrides to keep a single consistent look across devices */
 
-.tag-chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 22px;
-  padding: 0 10px;
-  border-radius: 10px;
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  background: var(--tag-bg);
-  mix-blend-mode: var(--tag-blend);
-  color: var(--tag-text);
-  font-family: 'Montserrat Local', 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-}
+/* Home uses shared <Tags /> component for tags */
 
 .showcase-thumb {
   width: 100%;
