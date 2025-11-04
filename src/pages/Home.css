@@ -139,6 +139,7 @@
   max-width: min(90rem, 100vw);
   margin: 24px auto 48px;
   padding: 0 calc(clamp(12px, 2vw, 24px) + 12px) 40px; 
+  isolation: isolate; /* contain blend/compositing effects to this section to prevent page-wide artifacts */
 }
 
 .showcase-header {
@@ -278,6 +279,14 @@
   --tag-blend: hard-light;
 }
 
+/* Normalize tag chips on small screens (iOS Safari) to avoid dark hard-light artifacts */
+@media (max-width: 739.98px) {
+  .showcase-section.theme-dark {
+    --tag-blend: normal;
+    --tag-bg: rgba(255, 255, 255, 0.18);
+  }
+}
+
 .tag-chip {
   display: inline-flex;
   align-items: center;
@@ -288,7 +297,6 @@
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
   background: var(--tag-bg);
-  border: 1px solid var(--tag-border);
   mix-blend-mode: var(--tag-blend);
   color: var(--tag-text);
   font-family: 'Montserrat Local', 'Montserrat', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
