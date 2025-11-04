@@ -120,11 +120,12 @@ function ProjCard({ title, href, tags = [], isDark, arrowColor, thumb }) {
           <Link className="showcase-thumb-link" to={href} aria-label={`${title} preview`}>
             <div className="showcase-thumb">
               <ProgressiveImage
-                className="showcase-thumb-media"
                 src={thumb}
                 placeholderSrc={ph}
                 alt={`${title} thumbnail`}
                 aspectRatio={'16 / 9'}
+                imgClassName="showcase-thumb-media"
+                priority
               />
             </div>
           </Link>
@@ -132,11 +133,12 @@ function ProjCard({ title, href, tags = [], isDark, arrowColor, thumb }) {
           <div className="showcase-thumb-link" aria-hidden>
             <div className="showcase-thumb">
               <ProgressiveImage
-                className="showcase-thumb-media"
                 src={thumb}
                 placeholderSrc={ph}
                 alt=""
                 aspectRatio={'16 / 9'}
+                imgClassName="showcase-thumb-media"
+                priority
               />
             </div>
           </div>

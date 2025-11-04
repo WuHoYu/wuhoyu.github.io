@@ -123,11 +123,12 @@ export default function EvolvingScripts() {
 			<div className="flex flex-col gap-[10px]" style={{ width: '100%' }}>
 				{/* Sequence: es1, (es2-a/es2-b), es3, es4, es5, es6.mp4, es7, es8.mp4, es9, es10.mp4, es11-a, es11-b, es12.mp4 */}
 									<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-										<ProgressiveImage
+														<ProgressiveImage
 											src={'/photos/evolvingscript/es1.jpg'}
 											placeholderSrc={'/photos/evolvingscript/tiny/es1-tiny.jpg'}
 											alt="Evolving Scripts es1"
-											aspectRatio={'16 / 9'}
+															aspectRatio={'16 / 9'}
+															priority
 										/>
 									</div>
 				<TwoImagesEqualHeightRow
