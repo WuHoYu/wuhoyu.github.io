@@ -1,23 +1,39 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { asset } from '../../utils/assets';
 
 function CardIdentity({ textColor, arrowColor, glassTheme, sliderValue }) {
-  // Detect iOS/iPadOS Safari and pick the proper format (HEVC alpha MOV for iOS Safari, WEBM alpha otherwise)
-  const isIOSSafari = (() => {
-    if (typeof navigator === 'undefined') return false;
+  // Build-time cache buster (set VITE_BUILD_ID in .env.production to force MOV refresh on Pages/CDN)
+  const BUILD_ID = import.meta.env.VITE_BUILD_ID || '';
+
+  // Detect iOS/iPadOS Safari and HEVC-alpha support
+  const { isIOSSafari, supportsHvc1 } = useMemo(() => {
+    if (typeof navigator === 'undefined') return { isIOSSafari: false, supportsHvc1: false };
     const ua = navigator.userAgent || '';
     const isIOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
     const isSafari = /Safari\//.test(ua) && !/Chrome\//.test(ua) && !/CriOS\//.test(ua);
-    return isIOS && isSafari;
-  })();
+    let supports = false;
+    if (typeof document !== 'undefined') {
+      const v = document.createElement('video');
+      if (v && typeof v.canPlayType === 'function') {
+        const res = v.canPlayType('video/mp4; codecs="hvc1"');
+        supports = !!res;
+      }
+    }
+    return { isIOSSafari: isIOS && isSafari, supportsHvc1: supports };
+  }, []);
+
+  const pickSrc = (sv) => {
+    const base = sv > 40 && sv < 80 ? 'sign2' : 'sign1';
+    const ext = (isIOSSafari && supportsHvc1) ? 'mov' : 'webm';
+    const qs = BUILD_ID ? `?v=${BUILD_ID}` : '';
+    return asset(`/videos/${base}.${ext}${qs}`);
+  };
 
   // Smooth crossfade between videos
-  const [currentSrc, setCurrentSrc] = useState(asset(isIOSSafari ? '/videos/sign1.mov' : '/videos/sign1.webm'));
+  const [currentSrc, setCurrentSrc] = useState(pickSrc(sliderValue));
   const [fade, setFade] = useState(true);
   useEffect(() => {
-    const base = sliderValue > 40 && sliderValue < 80 ? 'sign2' : 'sign1';
-    const chosen = isIOSSafari ? `${base}.mov` : `${base}.webm`;
-    const nextSrc = asset(`/videos/${chosen}`);
+    const nextSrc = pickSrc(sliderValue);
     if (nextSrc !== currentSrc) {
       setFade(false);
       setTimeout(() => {
@@ -25,7 +41,7 @@ function CardIdentity({ textColor, arrowColor, glassTheme, sliderValue }) {
         setFade(true);
       }, 400); // fade duration
     }
-  }, [sliderValue, currentSrc, isIOSSafari]);
+  }, [sliderValue, currentSrc, isIOSSafari, supportsHvc1]);
   return (
     <div className={`absolute box-border glass-card ${glassTheme}`}
       data-name="card-identity"
