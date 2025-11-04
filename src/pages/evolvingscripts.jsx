@@ -44,7 +44,7 @@ export default function EvolvingScripts() {
 
 		const rowStyle = { width: '100%', display: 'flex', gap: `${gap}px`, alignItems: 'flex-start' };
 		const tileCommon = { background: 'transparent', overflow: 'hidden', borderRadius: '9px', position: 'relative' };
-		const fallbackTileStyle = { flex: 1, ...tileCommon };
+		const fallbackTileStyle = { flex: 1, ...tileCommon, aspectRatio: '16 / 9' };
 		const imgStyleSized = { width: '100%', height: '100%', objectFit: 'contain', display: 'block' };
 		const imgStyleAuto = { width: '100%', height: 'auto', display: 'block' };
 
@@ -86,14 +86,14 @@ export default function EvolvingScripts() {
 		);
 	}
 
-	function Media({ src, alt, loopOverride }) {
+	function Media({ src, alt, loopOverride, ratio = '16 / 9' }) {
 		const isVideo = /\.(mp4|mov)$/i.test(src);
 		const [loaded, setLoaded] = useState(false);
 		if (isVideo) {
 			const shouldLoop = loopOverride ?? true;
             const isEs6 = /\/es6\.mp4$/i.test(src);
 			return (
-				<div className="prog-wrap">
+				<div className="prog-wrap" style={{ aspectRatio: ratio }}>
 					<video
 							src={asset(src)}
 						aria-label={alt}
@@ -111,7 +111,7 @@ export default function EvolvingScripts() {
 			);
 		}
 		return (
-			<div className="prog-wrap">
+			<div className="prog-wrap" style={{ aspectRatio: ratio }}>
 				<img
 						src={asset(src)}
 					alt={alt}
@@ -138,7 +138,7 @@ export default function EvolvingScripts() {
 			<div className="flex flex-col gap-[10px]" style={{ width: '100%' }}>
 				{/* Sequence: es1, (es2-a/es2-b), es3, es4, es5, es6.mp4, es7, es8.mp4, es9, es10.mp4, es11-a, es11-b, es12.mp4 */}
 						<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-							<Media src={'/photos/evolvingscript/es1.jpg'} alt="Evolving Scripts es1" />
+							<Media src={'/photos/evolvingscript/es1.jpg'} alt="Evolving Scripts es1" ratio={'16 / 9'} />
 						</div>
 				<TwoImagesEqualHeightRow
 							leftSrc={asset('/photos/evolvingscript/es2-a.png')}
@@ -157,7 +157,7 @@ export default function EvolvingScripts() {
 					{ src: '/photos/evolvingscript/es10.mp4', alt: 'Evolving Scripts es10' }
 				].map((item, i) => (
 					<div className="rounded-[9px]" key={`es-item-${i}`} style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-						<Media src={item.src} alt={item.alt} loopOverride={item.loopOverride} />
+						<Media src={item.src} alt={item.alt} loopOverride={item.loopOverride} ratio={'16 / 9'} />
 					</div>
 				))}
 				<TwoImagesEqualHeightRow
@@ -167,13 +167,13 @@ export default function EvolvingScripts() {
 					rightAlt="Evolving Scripts es11-b"
 				/>
 				<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-							<Media src={'/photos/evolvingscript/es12.mp4'} alt="Evolving Scripts es12" />
+							<Media src={'/photos/evolvingscript/es12.mp4'} alt="Evolving Scripts es12" ratio={'16 / 9'} />
 				</div>
 			</div>
 			<style>{`
 				/* Progressive blur-up only for Evolving Scripts page */
 				.prog-wrap { position: relative; width: 100%; height: auto; }
-				.prog-media { filter: blur(16px); transform: scale(1.02); opacity: 0.85; transition: filter 600ms cubic-bezier(0.22,1,0.36,1), transform 600ms cubic-bezier(0.22,1,0.36,1), opacity 300ms ease; will-change: filter, transform, opacity; }
+				.prog-media { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; filter: blur(16px); transform: scale(1.02); opacity: 0.85; transition: filter 600ms cubic-bezier(0.22,1,0.36,1), transform 600ms cubic-bezier(0.22,1,0.36,1), opacity 300ms ease; will-change: filter, transform, opacity; }
 				.prog-media.is-ready { filter: none; transform: none; opacity: 1; }
 				.prog-ph { position: absolute; inset: 0; background: rgba(200,200,200,0.16); }
 				.theme-dark .prog-ph { background: rgba(255,255,255,0.06); }
