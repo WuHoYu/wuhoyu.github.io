@@ -34,12 +34,21 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
   const handleHoverStart = () => { if (!isCoarsePointer) isHovered.set(1); };
   const handleHoverEnd = () => { if (!isCoarsePointer) isHovered.set(0); };
   const handleFocus = () => { if (!isCoarsePointer) isHovered.set(1); };
-  const handleBlur = () => { isHovered.set(0); };
+  const handleBlur = () => {
+    isHovered.set(0);
+    // Collapse any magnification after interaction
+    if (typeof mouseX?.set === 'function') mouseX.set(Infinity);
+  };
+  const handleTouchStart = () => {
+    // On touch, briefly show hover label while finger is down
+    isHovered.set(1);
+  };
   const handleClick = (e) => {
     if (typeof onClick === 'function') onClick(e);
     // Immediately clear any hover/focus after tap/click
     isHovered.set(0);
     if (ref.current && typeof ref.current.blur === 'function') ref.current.blur();
+    if (typeof mouseX?.set === 'function') mouseX.set(Infinity);
   };
 
   return (
@@ -53,6 +62,7 @@ function DockItem({ children, className = '', onClick, mouseX, spring, distance,
       onHoverEnd={handleHoverEnd}
       onFocus={handleFocus}
       onBlur={handleBlur}
+  onTouchStart={handleTouchStart}
       onPointerUp={handleBlur}
       onClick={handleClick}
       className={`dock-item ${className}`}
@@ -123,11 +133,6 @@ export default function Dock({
           mouseX.set(pageX);
         }}
         onMouseLeave={() => {
-          isHovered.set(0);
-          mouseX.set(Infinity);
-        }}
-        onTouchStart={() => {
-          // On touch, don't keep hover; ensure magnification is neutral
           isHovered.set(0);
           mouseX.set(Infinity);
         }}
