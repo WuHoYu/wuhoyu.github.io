@@ -12,11 +12,9 @@ export default function VideoThumb({
   poster,
   // Plain video: provide a palindrome asset if you want ping-pong
   inViewOnly = true,
-  blurOnLoad = false,
 }) {
   const ref = useRef(null);
   const inViewRef = useRef(true);
-  const [ready, setReady] = React.useState(false);
   
 
   useEffect(() => {
@@ -65,7 +63,7 @@ export default function VideoThumb({
   return (
     <video
       ref={ref}
-      className={(className + (blurOnLoad ? ` blur-on-load${ready ? ' is-ready' : ''}` : '')).trim()}
+      className={className}
       muted={muted}
       loop={loop}
       playsInline={playsInline}
@@ -75,7 +73,6 @@ export default function VideoThumb({
       controlsList="nofullscreen noremoteplayback nodownload"
       disableRemotePlayback
       autoPlay
-      onLoadedData={() => setReady(true)}
     >
       <source src={asset(`/videos/${srcBase}.webm`)} type="video/webm" />
       <source src={asset(`/videos/${srcBase}.mp4`)} type="video/mp4" />

@@ -325,10 +325,6 @@
   transform: scale(1.08);
 }
 
-/* Home-only constant blur-up helper */
-.blur-on-load { filter: blur(14px); transition: filter 280ms ease-in; }
-.blur-on-load.is-ready { filter: none; }
-
 /* Cotton thumbnail: use transparent wrapper background to avoid dark seam at curved edges */
 .showcase-thumb-link[aria-label*="COTTON"] .showcase-thumb { background: transparent; }
 

@@ -36,8 +36,6 @@ function GlassSection({ textColor, arrowColor, glassTheme, logos, sliderValue })
 export default function Home() {
   const { sliderValue = 30, navStamp } = useOutletContext() || {};
   const rootRef = React.useRef(null);
-  const [coiesReady, setCoiesReady] = React.useState(false);
-  const [hikvisionReady, setHikvisionReady] = React.useState(false);
   // Text changes at value=60 (logos switch at 50)
   const isLightBgForText = sliderValue < 60;
   const textColor = isLightBgForText ? '#1b1a1e' : '#fff';
@@ -101,13 +99,12 @@ export default function Home() {
             <div className="showcase-thumb-link" aria-hidden>
               <div className="showcase-thumb">
                 <img
-                  className={`showcase-thumb-media blur-on-load${coiesReady ? ' is-ready' : ''}`}
+                  className="showcase-thumb-media"
                   src={asset('/photos/COIES/COIES.png')}
                   alt="COIES@ICON KIT thumbnail"
                   fetchPriority="high"
                   loading="lazy"
                   decoding="async"
-                  onLoad={() => setCoiesReady(true)}
                 />
               </div>
             </div>
@@ -127,7 +124,6 @@ export default function Home() {
                   srcBase="thumb-cotton"
                   loop
                   autoPlay
-                  blurOnLoad
                 />
               </div>
             </Link>
@@ -150,7 +146,6 @@ export default function Home() {
                   srcBase="Stepstotheway-pal"
                   autoPlay
                   loop
-                  blurOnLoad
                 />
               </div>
             </Link>
@@ -166,12 +161,11 @@ export default function Home() {
             <Link className="showcase-thumb-link" to="/hikvision" aria-label="HIKVISION preview">
               <div className="showcase-thumb">
                 <img
-                  className={`showcase-thumb-media blur-on-load${hikvisionReady ? ' is-ready' : ''}`}
+                  className="showcase-thumb-media"
                   src={asset('/photos/hikvision/hikvision.jpeg')}
                   alt="HIKVISION thumbnail"
                   loading="lazy"
                   decoding="async"
-                  onLoad={() => setHikvisionReady(true)}
                 />
               </div>
             </Link>
