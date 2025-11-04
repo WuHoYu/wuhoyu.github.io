@@ -3,9 +3,12 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import './fonts.css';
+import { injectFontsOnce } from './utils/fonts';
 import App from './App.jsx';
 
 // Globally prevent context menu on images and videos (casual save deterrent)
+// Inject platform-routed fonts early so initial render uses correct families (helps Mainland when CDN is enabled)
+injectFontsOnce();
 document.addEventListener('contextmenu', (e) => {
   const target = e.target;
   if (!(target instanceof Element)) return;
