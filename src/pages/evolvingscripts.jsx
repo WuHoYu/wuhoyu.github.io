@@ -119,7 +119,7 @@ export default function EvolvingScripts() {
 			<div className="flex flex-col gap-[10px]" style={{ width: '100%' }}>
 				{/* Sequence: es1, (es2-a/es2-b), es3, es4, es5, es6.mp4, es7, es8.mp4, es9, es10.mp4, es11-a, es11-b, es12.mp4 */}
 						<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-							<Media src={asset('/photos/evolvingscript/es1.jpg')} alt="Evolving Scripts es1" />
+							<Media src={'/photos/evolvingscript/es1.jpg'} alt="Evolving Scripts es1" />
 						</div>
 				<TwoImagesEqualHeightRow
 							leftSrc={asset('/photos/evolvingscript/es2-a.png')}
@@ -148,7 +148,7 @@ export default function EvolvingScripts() {
 					rightAlt="Evolving Scripts es11-b"
 				/>
 				<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-							<Media src={asset('/photos/evolvingscript/es12.mp4')} alt="Evolving Scripts es12" />
+							<Media src={'/photos/evolvingscript/es12.mp4'} alt="Evolving Scripts es12" />
 				</div>
 			</div>
 		</ProjectTemplate>
