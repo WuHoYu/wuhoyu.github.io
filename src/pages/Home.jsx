@@ -102,6 +102,7 @@ export default function Home() {
                   className="showcase-thumb-media"
                   src={asset('/photos/COIES/COIES.png')}
                   alt="COIES@ICON KIT thumbnail"
+                  fetchPriority="high"
                   loading="lazy"
                   decoding="async"
                 />
