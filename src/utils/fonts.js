@@ -28,6 +28,14 @@ export function injectFontsOnce() {
     font-style: normal;
     font-display: swap;
   }
+  /* Alias to match component usage */
+  @font-face {
+    font-family: 'Source Han Sans CN';
+    src: url('${asset('/fonts/SourceHanSansCN-Normal.otf')}') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
   `;
 
   const style = document.createElement('style');

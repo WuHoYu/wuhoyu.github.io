@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import ProjectTemplate from '../components/ProjectTemplate.jsx';
+import { asset } from '../utils/assets';
 
 export default function EvolvingScripts() {
 		const tags = ['CONCEPT', 'UIUX', 'APP', 'EDUCATION'];
@@ -47,7 +48,7 @@ export default function EvolvingScripts() {
 				<div ref={containerRef} style={rowStyle}>
 					<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w1}px`, height: `${h}px` } : fallbackTileStyle}>
 						<img
-							src={leftSrc}
+							src={asset(leftSrc)}
 							alt={leftAlt}
 							loading="lazy"
 							decoding="async"
@@ -60,7 +61,7 @@ export default function EvolvingScripts() {
 					</div>
 					<div className="rounded-[9px]" style={h ? { ...tileCommon, width: `${w2}px`, height: `${h}px` } : fallbackTileStyle}>
 						<img
-							src={rightSrc}
+							src={asset(rightSrc)}
 							alt={rightAlt}
 							loading="lazy"
 							decoding="async"
@@ -82,7 +83,7 @@ export default function EvolvingScripts() {
       const isEs6 = /\/es6\.mp4$/i.test(src);
 			return (
 				<video
-					src={src}
+					src={asset(src)}
 					autoPlay
 					muted
 					loop={!!shouldLoop}
@@ -93,7 +94,7 @@ export default function EvolvingScripts() {
 			);
 		}
 		return (
-			<img src={src} alt={alt} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+			<img src={asset(src)} alt={alt} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
 		);
 	}
 
@@ -110,7 +111,7 @@ export default function EvolvingScripts() {
 				{/* Sequence: es1, (es2-a/es2-b), es3, es4, es5, es6.mp4, es7, es8.mp4, es9, es10.mp4, es11-a, es11-b, es12.mp4 */}
 									<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
 														<img
-															src={'/photos/evolvingscript/es1.jpg'}
+															src={asset('/photos/evolvingscript/es1.jpg')}
 															alt="Evolving Scripts es1"
 															loading="lazy"
 															decoding="async"
@@ -137,7 +138,7 @@ export default function EvolvingScripts() {
 												{/\.(mp4|mov)$/i.test(item.src) ? (
 													<Media src={item.src} alt={item.alt} loopOverride={item.loopOverride} ratio={'16 / 9'} />
 												) : (
-													<img src={item.src} alt={item.alt} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+													<img src={asset(item.src)} alt={item.alt} loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
 												)}
 					</div>
 				))}
@@ -148,7 +149,7 @@ export default function EvolvingScripts() {
 									rightAlt="Evolving Scripts es11-b"
 								/>
 								<div className="rounded-[9px]" style={{ width: '100%', background: 'transparent', overflow: 'hidden' }}>
-									<Media src={'/photos/evolvingscript/es12.mp4'} alt="Evolving Scripts es12" ratio={'16 / 9'} />
+									<Media src={asset('/photos/evolvingscript/es12.mp4')} alt="Evolving Scripts es12" ratio={'16 / 9'} />
 								</div>
 			</div>
             
